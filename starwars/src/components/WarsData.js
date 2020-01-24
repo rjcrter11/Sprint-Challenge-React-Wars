@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import WarsCard from "./WarsCard";
+import { Row } from "reactstrap";
 
 const WarsData = () => {
   const [people, setPeople] = useState([]);
@@ -10,13 +11,13 @@ const WarsData = () => {
     axios
       .get("https://swapi.co/api/people")
       .then((response) => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         setPeople(response.data.results);
 
         return axios.get("https://swapi.co/api/films");
       })
       .then((response) => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         setFilms(response.data.results);
       })
       .catch((error) => {
@@ -25,11 +26,11 @@ const WarsData = () => {
   }, []);
 
   return (
-    <div>
-      {/* {people.map((person) => {
+    <Row xs="1" md="2" xl="3">
+      {people.map((person) => {
         return <WarsCard person={person} film={films} key={person.url} />;
-      })} */}
-    </div>
+      })}
+    </Row>
   );
 };
 
